@@ -116,7 +116,7 @@ $product->in('en')->toArray();
 ]
 ```
 
-### Creating / Updating
+### Creating
 
 ```php
 // Create product in the current locale
@@ -140,7 +140,11 @@ Product::create([
     'name->fr' => 'Nom du produit',
     'description' => 'Description ...', // description will be set in the current locale only
 ]);
+```
 
+### Updating
+
+```php
 // Update translation for the current locale
 $product->update([
     'name' => 'test'
