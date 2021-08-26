@@ -5,7 +5,7 @@ Make your Eloquent Models translatable.
 ## Installation
 
 ```bash
-composer install firstpoint-ch/laravel-translatable-model
+composer require firstpoint-ch/laravel-translatable-model
 ```
 
 Then you can publish the config file:
