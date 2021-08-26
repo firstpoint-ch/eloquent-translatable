@@ -31,12 +31,12 @@ class TranslatableServiceProvider extends ServiceProvider
 
         Blueprint::macro('mediumTranslatable', function ($column) {
             /** @var Blueprint $this */
-            return $this->longText($column);
+            return $this->mediumText($column);
         });
 
         Blueprint::macro('longTranslatable', function ($column) {
             /** @var Blueprint $this */
-            return $this->text($column);
+            return $this->longText($column);
         });
     }
 }
