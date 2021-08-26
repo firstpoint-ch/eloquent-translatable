@@ -48,9 +48,12 @@ class Product extends Model
     use Translatable;
 
     protected $casts = [
+        // Database
         'name' => Localized::class,
         'description' => Localized::class,
-        'category' => Dictonary::class, // Will get value from /resources/lang/[locale].json
+
+        // Dictonary: get value from /resources/lang/[locale].json
+        'category' => Dictonary::class,
     ];
 }
 ```
@@ -61,7 +64,8 @@ You can specify a dictonary by appending the name as a parameter.
 class Product extends Model
 {
     protected $casts = [
-        'category' => Dictonary::class.':categories', // Will get value from /resources/lang/[locale]/categories.php
+        // Will get value from /resources/lang/[locale]/categories.php
+        'category' => Dictonary::class.':categories',
     ];
 }
 ```
