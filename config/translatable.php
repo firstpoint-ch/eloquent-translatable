@@ -2,6 +2,9 @@
 
 return [
 
-    'fallback_local' => 'en',
+    /*
+     * Define available locales
+     */
+    'locales' => ['fr', 'en'],
 
 ];

@@ -78,13 +78,7 @@ class Product extends Model
 // Output the name in the curent locale or fallback to the default locale
 echo $product->name;
 
-// Output the name in a specific locale or null
-echo $product->name->in('fr');
-
-// This is an alias for ->in('fr')
-echo $product->name->fr;
-
-// Or you can specify the locale on the model itself
+// Output the name in a specific locale or null, no fallback.
 echo $product->in('fr')->name;
 echo $product->description; // Still in french
 ```
@@ -98,20 +92,17 @@ $product->toArray();
 // Outputs
 [
     'id' => 1,
-    'name' => [
-        'en' => 'Product name',
-        'fr' => 'Nom du produit',
-    ],
+    'name' => 'Product name',
     // ...
 ]
 
-// Use a specific locale
-$product->in('en')->toArray();
+// As array
+$product->in('fr')->toArray();
 
 // Outputs
 [
     'id' => 1,
-    'name' => 'Product name',
+    'name' => 'Nom du produit',
     // ...
 ]
 ```
@@ -155,7 +146,13 @@ $product->in('fr')->update([
     'name' => 'test'
 ]);
 
-// Update translations for multiple locales
+// Using arrow notation
+$product->update([
+    'name->en' => 'Product name',
+    'name->fr' => 'Nom du produit',
+]);
+
+// Override all translations by using an array
 $product->update([
     'name' => [
         'en' => 'Product name',
@@ -163,19 +160,10 @@ $product->update([
     ],
 ]);
 
-// Using arrow notation
-$product->update([
-    'name->en' => 'Product name',
-    'name->fr' => 'Nom du produit',
-]);
-
 // Set translation for current locale
 $product->name = 'The name';
 
 // Set translation for a specific locale
-$product->name->fr = 'Nom';
-
-// Or
 $product->in('fr')->name = 'Nom';
 
 // Using the fill method

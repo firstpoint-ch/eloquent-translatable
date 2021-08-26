@@ -3,8 +3,8 @@
 namespace FirstpointCh\Translatable\Casts;
 
 use Illuminate\Support\Facades\App;
-use FirstpointCh\Translatable\LocalizedValue;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Support\Facades\Config;
 
 class Localized implements CastsAttributes
 {
@@ -20,8 +20,18 @@ class Localized implements CastsAttributes
     public function get($model, $key, $value, $attributes)
     {
         $value = (array)json_decode($value);
+        $locale = $model->locale ?? app()->getLocale();
+        $fallback = Config::get('app.fallback_locale');
 
-        return new LocalizedValue($model, $key, $value);
+        if (array_key_exists($locale, $value)) {
+            return $value[$locale];
+        }
+
+        if (array_key_exists($fallback, $value)) {
+            return $value[$fallback];
+        }
+
+        return null;
     }
 
     /**
@@ -39,8 +49,6 @@ class Localized implements CastsAttributes
         if (is_array($value)) {
             return json_encode($value);
         }
-
-        // dd($model, $key, $value, $attributes);
 
         // Merge translations
         $locale = $model->locale ?? App::getLocale();
