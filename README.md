@@ -16,10 +16,10 @@ php artisan vendor:publish --provider="FirstpointCh\\Translatable\\TranslatableS
 
 ## Getting started
 
-With this package, you can translate model on two different ways:
+With this package, you can translate model in two different ways:
 
 1. Database: It stores all translations in the same table column using json serialization
-2. Dictonary: It store keys and retrieve translations from ```/resources/lang/[locale].json``` or any files in ```/resources/lang/[locale]/[dictonary].php```
+2. Dictonary: It stores keys and retrieve translations from ```/resources/lang/[locale].json``` or any files in ```/resources/lang/[locale]/[dictonary].php```.
 
 ### Configure the model
 
