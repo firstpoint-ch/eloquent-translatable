@@ -11,7 +11,7 @@ composer install firstpoint-ch/laravel-translatable-model
 Then you can publish the config file:
 
 ```bash
-# Commande pour publish
+php artisan vendor:publish --provider="FirstpointCh\\Translatable\\TranslatableServiceProvider"
 ```
 
 ## Getting started
