@@ -49,4 +49,14 @@ class DictonaryTest extends TestCase
 
         $this->assertEquals('In stock', $product->status);
     }
+
+    /** @test */
+    public function it_outputs_a_raw_value()
+    {
+        $product = Product::create([
+            'status' => 'in_stock',
+        ]);
+
+        $this->assertEquals('in_stock', $product->raw('status'));
+    }
 }

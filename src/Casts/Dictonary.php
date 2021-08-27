@@ -26,6 +26,10 @@ class Dictonary implements CastsAttributes
      */
     public function get($model, $key, $value, $attributes)
     {
+        if ($model->locale === '*') {
+            return $value;
+        }
+
         if (!is_null($this->dictonary)) {
             return Lang::get($this->dictonary . '.' . $value);
         }

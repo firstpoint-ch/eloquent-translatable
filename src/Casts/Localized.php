@@ -20,6 +20,11 @@ class Localized implements CastsAttributes
     public function get($model, $key, $value, $attributes)
     {
         $value = (array)json_decode($value);
+
+        if ($model->locale === '*') {
+            return $value;
+        }
+
         $locale = $model->locale ?? app()->getLocale();
         $fallback = Config::get('app.fallback_locale');
 

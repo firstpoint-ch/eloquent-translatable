@@ -74,6 +74,17 @@ class TranslationTest extends TestCase
     }
 
     /** @test */
+    public function it_outputs_raw_attributes()
+    {
+        $product = Product::create([
+            'name->en' => 'test en',
+            'name->fr' => 'test fr'
+        ]);
+
+        $this->assertEquals(['en' => 'test en', 'fr' => 'test fr'], $product->raw('name'));
+    }
+
+    /** @test */
     public function it_outputs_locales_as_array()
     {
         $product = Product::create([

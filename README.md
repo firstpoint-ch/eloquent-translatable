@@ -81,6 +81,10 @@ echo $product->name;
 // Output the name in a specific locale or null, no fallback.
 echo $product->in('fr')->name;
 echo $product->description; // Still in french
+
+// Get the underlying value
+echo $product->in('*')->name; // ['en' => 'name']
+echo $product->raw('name'); // ['en' => 'name']
 ```
 
 ### Using arrays
