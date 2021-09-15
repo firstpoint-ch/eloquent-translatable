@@ -4,7 +4,6 @@ namespace FirstpointCh\Translatable\Tests;
 
 use FirstpointCh\Translatable\Tests\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Config;
 
 class DictonaryTest extends TestCase
 {
