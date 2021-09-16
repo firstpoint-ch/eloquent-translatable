@@ -5,7 +5,6 @@ namespace FirstpointCh\Translatable\Tests;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
-use FirstpointCh\Translatable\TranslatableServiceProvider;
 use Illuminate\Support\Facades\Config;
 
 abstract class TestCase extends Orchestra

@@ -10,12 +10,6 @@ You can install this package via composer by running:
 composer require firstpoint-ch/eloquent-translatable
 ```
 
-Then you can publish the config file:
-
-```bash
-php artisan vendor:publish --provider="FirstpointCh\\Translatable\\TranslatableServiceProvider"
-```
-
 ## Configure models
 
 Models can be translated in two different ways:

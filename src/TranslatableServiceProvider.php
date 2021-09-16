@@ -16,10 +16,6 @@ class TranslatableServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerMacros();
-
-        $this->publishes([
-            __DIR__.'/../config/translatable.php' => App::configPath('translatable.php'),
-        ]);
     }
 
     private function registerMacros()

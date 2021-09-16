@@ -3,7 +3,7 @@
     "description": "Make Laravel Eloquent Model Translatable",
     "authors": [
         {
-            "name": "fred",
+            "name": "Fred Marmillod",
             "email": "fmarmillod@firstpoint.ch"
         }
     ],
