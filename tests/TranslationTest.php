@@ -96,6 +96,25 @@ class TranslationTest extends TestCase
     }
 
     /** @test */
+    public function it_outputs_raw_values_as_array()
+    {
+        $product = Product::create([
+            'name->en' => 'test en',
+            'name->fr' => 'test fr'
+        ]);
+
+        $this->assertEquals([
+            'en' => 'test en',
+            'fr' => 'test fr'
+        ], $product->in('*')->toArray()['name']);
+
+        $this->assertEquals([
+            'en' => 'test en',
+            'fr' => 'test fr'
+        ], $product->raw('name'));
+    }
+
+    /** @test */
     public function it_uses_fallback_locale_when_translation_is_missing()
     {
         $product = Product::create([
