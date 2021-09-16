@@ -7,6 +7,7 @@
             "email": "fmarmillod@firstpoint.ch"
         }
     ],
+    "license": "MIT",
     "require": {
         "illuminate/database": "^7.0|^8.0",
         "illuminate/support": "^7.0|^8.0"
