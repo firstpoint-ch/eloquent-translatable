@@ -4,8 +4,10 @@ Make your Eloquent Models translatable.
 
 ## Installation
 
+You can install this package via composer by running:
+
 ```bash
-composer require firstpoint-ch/laravel-translatable-model
+composer require firstpoint-ch/eloquent-translatable
 ```
 
 Then you can publish the config file:
@@ -14,22 +16,19 @@ Then you can publish the config file:
 php artisan vendor:publish --provider="FirstpointCh\\Translatable\\TranslatableServiceProvider"
 ```
 
-## Getting started
+## Configure models
 
-With this package, you can translate model in two different ways:
+Models can be translated in two different ways:
 
-1. Database: It stores all translations in the same table column using json serialization
-2. Dictonary: It stores keys and retrieve translations from ```/resources/lang/[locale].json``` or any files in ```/resources/lang/[locale]/[dictonary].php```.
+1. **Database:** It stores translations as JSON in the database
+2. **Dictonary:** It stores keys and retrieve translations from the global ```/resources/lang/[locale].json``` or any specific file in ```/resources/lang/[locale]/[dictonary].php```.
 
-### Configure the model
-
-First you should store any database translated field as a ```text```, ```mediumText``` or ```longText```. You can use ```translatable``` macro so you can quickly see which fields are translatable. Fields using the dictonary method can be set to ```string```.
+First you should store any database translated field as a ```json``` column. This package provide a ```translatable``` macro so you can quickly see which fields are translatable. Fields using the dictonary mode could be set to ```string```.
 
 ```php
 Schema::create('products', function ($table) {
     $table->id();
-    $table->translatable('name'); // Outputs $table->text('name');
-    $table->longTranslatable('description'); // Outputs $table->longText('description');
+    $table->translatable('name'); // Outputs $table->json('name');
     $table->string('category'); // Will be used as a dictonary
     $table->decimal('price');
     $table->timestamps();
@@ -52,129 +51,42 @@ class Product extends Model
         'name' => Localized::class,
         'description' => Localized::class,
 
-        // Dictonary: get value from /resources/lang/[locale].json
+        // Dictonary:
+        //get value from /resources/lang/[locale].json
         'category' => Dictonary::class,
-    ];
-}
-```
 
-You can specify a dictonary by appending the name as a parameter.
-
-```php
-class Product extends Model
-{
-    protected $casts = [
-        // Will get value from /resources/lang/[locale]/categories.php
+        // or get value from /resources/lang/[locale]/categories.php
         'category' => Dictonary::class.':categories',
     ];
 }
 ```
 
-## Using the model
+## Basic example
 
-### Get translations
-
-```php
-// Output the name in the curent locale or fallback to the default locale
-echo $product->name;
-
-// Output the name in a specific locale or null, no fallback.
-echo $product->in('fr')->name;
-echo $product->description; // Still in french
-
-// Get the underlying value
-echo $product->in('*')->name; // ['en' => 'name']
-echo $product->raw('name'); // ['en' => 'name']
-```
-
-### Using arrays
+Here's a quick look of what this package can do, check our [extended documentation](https://docs.firstpoint.ch/eloquent-translatable) for all the details.
 
 ```php
-// As array
-$product->toArray();
+app()->setLocale('en');
 
-// Outputs
-[
-    'id' => 1,
-    'name' => 'Product name',
-    // ...
-]
+// Set translation in the current locale
+$product = Product::create(['name' => 'Product name']);
 
-// As array
-$product->in('fr')->toArray();
+// Get translation in the current locale
+echo $product->name; // Product name
 
-// Outputs
-[
-    'id' => 1,
-    'name' => 'Nom du produit',
-    // ...
-]
-```
+// Get array in the current locale
+dd($product->toArray()); // ['name' => 'Product name']
 
-### Creating
+// Update the current locale
+$product->update(['name' => 'New name']);
 
-```php
-// Create product in the current locale
-Product::create([
-    'name' => 'Product name',
-    'description' => 'Description ...',
-]);
+// Update a specific locale
+$product->update(['name->fr' => 'Nom du produit']);
 
-// Create a product with multiple translatons
-Product::create([
-    'name' => [
-        'en' => 'Product name',
-        'fr' => 'Nom du produit',
-    ],
-    'description' => 'Description ...', // description will be set in the current locale only
-]);
+// Force a locale
+echo $product->in('fr')->name; // Nom du produit
 
-// Using arrow notation
-Product::create([
-    'name->en' => 'Product name',
-    'name->fr' => 'Nom du produit',
-    'description' => 'Description ...', // description will be set in the current locale only
-]);
-```
-
-### Updating
-
-```php
-// Update translation for the current locale
-$product->update([
-    'name' => 'test'
-]);
-
-// Update translation for a specific locale
-$product->in('fr')->update([
-    'name' => 'test'
-]);
-
-// Using arrow notation
-$product->update([
-    'name->en' => 'Product name',
-    'name->fr' => 'Nom du produit',
-]);
-
-// Override all translations by using an array
-$product->update([
-    'name' => [
-        'en' => 'Product name',
-        'fr' => 'Nom du produit',
-    ],
-]);
-
-// Set translation for current locale
-$product->name = 'The name';
-
-// Set translation for a specific locale
-$product->in('fr')->name = 'Nom';
-
-// Using the fill method
-$product->fill([
-    'name->fr' => 'Nom',
-    'name->en' => 'Name',
-])
-
-$product->save();
+// Get raw value
+dd($product->raw('name')); // ['en' => 'Product name', 'fr' => 'Nom du produit']
+dd($product->in('*')->toArray()); // ['name' => ['en' => 'Product name', 'fr' => 'Nom du produit']]
 ```
