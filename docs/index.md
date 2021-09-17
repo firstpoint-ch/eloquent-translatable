@@ -4,7 +4,7 @@ title: Laravel Eloquent Translatable
 
 ## Make your Eloquent Models translatable.
 
-This page offers an easy way to add localization to your Eloquent Models.
+This package offers an easy way to add localization to your Eloquent Models.
 
 ## Installation
 

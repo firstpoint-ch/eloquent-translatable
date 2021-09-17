@@ -5,7 +5,7 @@ namespace FirstpointCh\Translatable\Tests;
 use FirstpointCh\Translatable\Tests\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class DictonaryTest extends TestCase
+class DictionaryTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -17,7 +17,7 @@ class DictonaryTest extends TestCase
     }
 
     /** @test */
-    public function it_translates_dictonary_with_the_global_json_file()
+    public function it_translates_dictionary_with_the_global_json_file()
     {
         $product = Product::create([
             'category' => 'Garden',
@@ -31,7 +31,7 @@ class DictonaryTest extends TestCase
     }
 
     /** @test */
-    public function it_outputs_value_from_a_specific_dictonary()
+    public function it_outputs_value_from_a_specific_dictionary()
     {
         $product = Product::create([
             'status' => 'in_stock',
