@@ -2,7 +2,7 @@
 
 namespace FirstpointCh\Translatable\Tests\Models;
 
-use FirstpointCh\Translatable\Casts\Dictonary;
+use FirstpointCh\Translatable\Casts\Dictionary;
 use FirstpointCh\Translatable\Casts\Localized;
 use FirstpointCh\Translatable\Traits\Translatable;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +15,7 @@ class Product extends Model
 
     protected $casts = [
         'name' => Localized::class,
-        'category' => Dictonary::class,
-        'status' => Dictonary::class.':test::statuses',
+        'category' => Dictionary::class,
+        'status' => Dictionary::class.':test::statuses',
     ];
 }

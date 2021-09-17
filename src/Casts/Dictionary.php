@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
-class Dictonary implements CastsAttributes
+class Dictionary implements CastsAttributes
 {
-    public $dictonary;
+    public $dictionary;
 
-    public function __construct($dictonary = null)
+    public function __construct($dictionary = null)
     {
-        $this->dictonary = $dictonary;
+        $this->dictionary = $dictionary;
     }
 
     /**
@@ -30,8 +30,8 @@ class Dictonary implements CastsAttributes
             return $value;
         }
 
-        if (!is_null($this->dictonary)) {
-            return Lang::get($this->dictonary . '.' . $value);
+        if (!is_null($this->dictionary)) {
+            return Lang::get($this->dictionary . '.' . $value);
         }
 
         return Lang::get($value);

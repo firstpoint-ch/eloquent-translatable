@@ -15,24 +15,24 @@ composer require firstpoint-ch/eloquent-translatable
 Models can be translated in two different ways:
 
 1. **Database:** It stores translations as JSON in the database
-2. **Dictonary:** It stores keys and retrieve translations from the global ```/resources/lang/[locale].json``` or any specific file in ```/resources/lang/[locale]/[dictonary].php```.
+2. **Dictionary:** It stores keys and retrieve translations from the global ```/resources/lang/[locale].json``` or any specific file in ```/resources/lang/[locale]/[dictionary].php```.
 
-First you should store any database translated field as a ```json``` column. This package provide a ```translatable``` macro so you can quickly see which fields are translatable. Fields using the dictonary mode could be set to ```string```.
+First you should store any database translated field as a ```json``` column. This package provide a ```translatable``` macro so you can quickly see which fields are translatable. Fields using the dictionary mode could be set to ```string```.
 
 ```php
 Schema::create('products', function ($table) {
     $table->id();
     $table->translatable('name'); // Outputs $table->json('name');
-    $table->string('category'); // Will be used as a dictonary
+    $table->string('category'); // Will be used as a dictionary
     $table->decimal('price');
     $table->timestamps();
 })
 ```
 
-Then you should add the ```Translatable``` trait to the model and cast attributes using ```Localized```or ```Dictonary```
+Then you should add the ```Translatable``` trait to the model and cast attributes using ```Localized```or ```Dictionary```
 
 ```php
-use FirstpointCh\Translatable\Casts\Dictonary;
+use FirstpointCh\Translatable\Casts\Dictionary;
 use FirstpointCh\Translatable\Casts\Localized;
 use FirstpointCh\Translatable\Traits\Translatable;
 
@@ -45,12 +45,12 @@ class Product extends Model
         'name' => Localized::class,
         'description' => Localized::class,
 
-        // Dictonary:
+        // Dictionary:
         //get value from /resources/lang/[locale].json
-        'category' => Dictonary::class,
+        'category' => Dictionary::class,
 
         // or get value from /resources/lang/[locale]/categories.php
-        'category' => Dictonary::class.':categories',
+        'category' => Dictionary::class.':categories',
     ];
 }
 ```
