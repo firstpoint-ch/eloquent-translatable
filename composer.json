@@ -20,10 +20,7 @@
         "psr-4": {
             "FirstpointCh\\Translatable\\": "src",
             "FirstpointCh\\Translatable\\Tests\\": "tests"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        }
     },
     "extra": {
         "laravel": {
